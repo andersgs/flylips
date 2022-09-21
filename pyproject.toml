@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flylips"
+description = "Calculate ellipses on Drosophila wings"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["Bionformatics", "Drosophila", "wings", "ellipses"]
+license = { text = "BSD 3-Clause License" }
+classifiers = ["Programming Language :: Python :: 3"]
+dependencies = ["scikit-image", "matplotlib"]
+dynamic = ["version"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["flylips"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools.dynamic]
+version = { attr = "flylips.__version__" }
+
+[project.scripts]
+flylips = "flylips.main:main"
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    # note the use of single quote below to denote "raw" strings in TOML
+    'ignore:function ham\(\) is deprecated:DeprecationWarning',
+]
